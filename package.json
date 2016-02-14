@@ -1,0 +1,35 @@
+{
+  "name": "expediate",
+  "version": "1.0.0",
+  "description": "domain driven express apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaeljosephrosenthal/expediate.git"
+  },
+  "author": "Michael Joseph Rosenthal <rosenthalm93@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaeljosephrosenthal/expediate/issues"
+  },
+  "homepage": "https://github.com/michaeljosephrosenthal/expediate#readme",
+  "dependencies": {
+    "babel-core": "^6.5.1",
+    "babel-register": "^6.5.1",
+    "express": "^4.13.4",
+    "express-routebuilder": "^2.1.0"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-export-extensions"
+    ]
+  }
+}
