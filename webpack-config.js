@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
-import WebpackDevServer from 'webpack-dev-server'
 import nodeExternals from 'webpack-node-externals'
 
 const devConfig = _ => (
@@ -10,7 +9,7 @@ const devConfig = _ => (
          {}
     )
 
-module.exports = function({server, out, root}){
+module.exports = function({server, out}){
     process.chdir(process.env.PWD)
     var pwd = './'
     return {

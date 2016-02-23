@@ -7,11 +7,10 @@ var fs = require('fs');
 var nodemon = require('nodemon');
 var backendConfig = require('./webpack-config');
 
-
 function optNameChain(){
     var opt = undefined;
-    for (i = 0; i < arguments.length; i++) { 
-        arg = arguments[i]
+    for (var i = 0; i < arguments.length; i++) { 
+        var arg = arguments[i]
         if(typeof(arg) == "string"){
             var optIndex = process.argv.indexOf(arg)
             if(optIndex)
@@ -22,10 +21,15 @@ function optNameChain(){
         if(opt) return opt;
     }
 }
+
+function importantLog(str){
+  gutil.log(gutil.colors.bgMagenta(" ") + " " + gutil.colors.bold(str))
+}
+
+
 var options = {
     server: optNameChain("--server", "-s", process.argv.length - 2),
     out: optNameChain("--out", "--build", "-o", "-b", process.argv.length - 1),
-    root: optNameChain("--root","-r") || "./src"
 }
 var config = backendConfig(options)
 
@@ -64,9 +68,6 @@ gulp.task('backend-watch', function(done) {
 gulp.task('build', ['backend-build']);
 gulp.task('watch', ['backend-watch']);
 
-function importantLog(str){
-  gutil.log(gutil.colors.bgMagenta(" ") + " " + gutil.colors.bold(str))
-}
 gulp.task('default', ['backend-watch'], function() {
   importantLog("serving patchable backend from '" + gutil.colors.cyan(options.server) + "'")
   importantLog("writing output to '" + gutil.colors.cyan(options.out) + "'")
@@ -83,3 +84,7 @@ gulp.task('default', ['backend-watch'], function() {
     importantLog('Patched!');
   });
 });
+
+if (require.main === module) {
+    gulp.start('default');
+}
