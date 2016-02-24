@@ -2,6 +2,8 @@ import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
 import nodeExternals from 'webpack-node-externals'
+import XRegExp from 'xregexp'
+
 
 const devConfig = _ => (
     process.env.NODE_ENV !== 'production' ? 
@@ -9,7 +11,7 @@ const devConfig = _ => (
          {}
     )
 
-module.exports = function({server, out}){
+module.exports = function({server, out, es6Modules}){
     process.chdir(process.env.PWD)
     var pwd = './'
     return {
@@ -30,14 +32,14 @@ module.exports = function({server, out}){
       context: path.resolve(pwd),
       resolve: {
         moduleDirectories: ["src", "node_modules"],
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.json', '.js', '.jsx']
       },
       module: {
         loaders: [
           {
             test: /\.js$/,
-            loaders: [ 'babel-loader?{presets:["react","es2015","stage-0"],plugins:["transform-export-extensions"],env:{development:{presets:["react-hmre"]}, production: {plugins:["transform-react-remove-prop-types","transform-react-constant-elements","transform-react-inline-elements"]}}}' ],
-            exclude: /node_modules/,
+            loaders: [ 'babel-loader?{presets:["es2015","stage-0"]}' ],
+            exclude: XRegExp(`/node_modules\/(?!${es6Modules})/`),
           },
           {
               test: /\.json$/, loader: 'json'

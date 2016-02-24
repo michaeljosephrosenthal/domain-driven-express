@@ -32,6 +32,7 @@ function importantLog(str){
 var options = {
     server: optNameChain("--server", "-s", process.argv.length - 2),
     out: optNameChain("--out", "--build", "-o", "-b", process.argv.length - 1),
+    es6Modules: optNameChain("--es6-modules"),
 }
 var config = backendConfig(options)
 
@@ -61,7 +62,7 @@ gulp.task('backend-watch', function(done) {
   webpack(config).watch(100, function(err, stats) {
     if(!firedDone) {
       firedDone = true;
-      done();
+      onBuild(done)(err, stats)
     }
     nodemon.restart();
   });
