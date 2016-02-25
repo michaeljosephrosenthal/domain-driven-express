@@ -1,1 +1,142 @@
-!function(e){function r(n){if(t[n])return t[n].exports;var u=t[n]={exports:{},id:n,loaded:!1};return e[n].call(u.exports,u,u.exports,r),u.loaded=!0,u.exports}var t={};return r.m=e,r.c=t,r.p="",r(0)}([function(e,r,t){e.exports=t(2)},function(e,r){e.exports=require("express")},function(e,r,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}function u(e){var r=e.app,t=void 0===r?t:r,n=e.domains;return Object.values((0,i["default"])(n)).forEach(function(e){return t.use(e)}),t}Object.defineProperty(r,"__esModule",{value:!0}),r["default"]=u;var o=t(1),a=n(o),f=t(3),i=n(f);new a["default"]},function(e,r,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}function u(e){if(Array.isArray(e)){for(var r=0,t=Array(e.length);r<e.length;r++)t[r]=e[r];return t}return Array.from(e)}function o(e,r){var t=arguments.length<=2||void 0===arguments[2]?"":arguments[2];return Object.keys(r).forEach(function(n){var o=r[n],a=o.methods,f=o.handlers;a.forEach(function(r){var o;(o=e[r]).call.apply(o,[e,t+n].concat(u(f)))})}),e}function a(e){var r=e.prefix,t=e.routes;return o(c["default"].Router(),t,"/"+r)}function f(e){return Object.values(e).filter(function(e){return e.routes}).map(a)}Object.defineProperty(r,"__esModule",{value:!0}),r.domainMiddlewareGenerator=f;var i=t(1),c=n(i)}]);
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(2);
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	module.exports = require("express");
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = Application;
+
+	var _express = __webpack_require__(1);
+
+	var _express2 = _interopRequireDefault(_express);
+
+	var _domainMiddlewareGenerator = __webpack_require__(3);
+
+	var _domainMiddlewareGenerator2 = _interopRequireDefault(_domainMiddlewareGenerator);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function Application(_ref) {
+	    var app = _ref.app;
+	    var domains = _ref.domains;
+	    var _ref$middlewareGenera = _ref.middlewareGenerators;
+	    var middlewareGenerators = _ref$middlewareGenera === undefined ? [_domainMiddlewareGenerator2.default] : _ref$middlewareGenera;
+
+	    app = app || new _express2.default();
+	    middlewareGenerators.forEach(function (generator) {
+	        return Object.values(generator(domains)).forEach(function (middleware) {
+	            return app.use(middleware);
+	        });
+	    });
+	    return app;
+	}
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.domainMiddlewareGenerator = domainMiddlewareGenerator;
+
+	var _express = __webpack_require__(1);
+
+	var _express2 = _interopRequireDefault(_express);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function routeBuilder(router, routes) {
+	    var prefix = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+
+	    Object.keys(routes).forEach(function (endpoint) {
+	        var _routes$endpoint = routes[endpoint];
+	        var methods = _routes$endpoint.methods;
+	        var handlers = _routes$endpoint.handlers;
+
+	        methods.forEach(function (method) {
+	            var _router$method;
+
+	            (_router$method = router[method]).call.apply(_router$method, [router, prefix + endpoint].concat(_toConsumableArray(handlers)));
+	        });
+	    });
+	    return router;
+	};
+
+	function domainRoutes(_ref) {
+	    var prefix = _ref.prefix;
+	    var routes = _ref.routes;
+
+	    return routeBuilder(_express2.default.Router(), routes, '/' + prefix);
+	}
+	function domainMiddlewareGenerator(domains) {
+	    return Object.values(domains).filter(function (domain) {
+	        return domain.routes;
+	    }).map(domainRoutes);
+	}
+
+/***/ }
+/******/ ]);
