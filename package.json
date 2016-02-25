@@ -2,7 +2,7 @@
   "name": "expediate",
   "version": "1.0.0",
   "description": "domain driven express apps",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": "./gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
