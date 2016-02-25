@@ -1,9 +1,9 @@
 {
-  "name": "expediate",
+  "name": "express-domain-driver",
   "version": "1.0.0",
   "description": "domain driven express apps",
   "main": "dist/index.js",
-  "bin": "./gulpfile.js",
+  "bin": "node-simple-webpacker",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node-simple-webpacker --entry ./src/Application.js --out ./build/index.js --modules src",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/michaeljosephrosenthal/expediate.git"
+    "url": "git+https://github.com/michaeljosephrosenthal/express-domain-driver.git"
   },
   "author": "Michael Joseph Rosenthal <rosenthalm93@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/michaeljosephrosenthal/expediate/issues"
+    "url": "https://github.com/michaeljosephrosenthal/express-domain-driver/issues"
   },
-  "homepage": "https://github.com/michaeljosephrosenthal/expediate#readme",
+  "homepage": "https://github.com/michaeljosephrosenthal/express-domain-driver#readme",
   "dependencies": {
     "express": "^4.13.4",
     "node-simple-webpacker": "michaeljosephrosenthal/node-simple-webpacker"
