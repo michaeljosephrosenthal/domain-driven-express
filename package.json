@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "domain driven express apps",
   "main": "dist/index.js",
-  "bin": "node-simple-webpacker",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node-simple-webpacker --entry ./src/Application.js --out ./build/index.js --modules src",
