@@ -1,21 +1,16 @@
-import fs from 'fs'
-import path from 'path'
-import webpack from 'webpack'
-import nodeExternals from 'webpack-node-externals'
-import XRegExp from 'xregexp'
+var fs = require('fs');
+var path = require('path');
+var webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
+var XRegExp = require('xregexp');
 
-
-const devConfig = _ => (
-    process.env.NODE_ENV !== 'production' ? 
-         {devtool: 'source-map', debug: true} :
-         {}
-    )
-
-module.exports = function({server, out, es6Modules}){
+module.exports = function(options){
+    var server     = options.server,
+        out        = options.out,
+        es6Modules = options.es6Modules;
     process.chdir(process.env.PWD)
     var pwd = './'
-    return {
-      ...devConfig(),
+    var config =  {
       externals: [ nodeExternals({ whitelist: ["webpack/hot/poll?1000"] }) ],
       plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
@@ -39,7 +34,7 @@ module.exports = function({server, out, es6Modules}){
           {
             test: /\.js$/,
             loaders: [ 'babel-loader?{presets:["es2015","stage-0"]}' ],
-            exclude: XRegExp(`/node_modules\/(?!${es6Modules})/`),
+            exclude: XRegExp('/node_modules\/(?!' + es6Modules + ')/'),
           },
           {
               test: /\.json$/, loader: 'json'
@@ -52,4 +47,9 @@ module.exports = function({server, out, es6Modules}){
         filename: path.basename(out),
       },
     }
+    if (process.env.NODE_ENV !== 'production'){
+        config.devtool = 'source-map'
+        config.debug = true
+    }
+    return config
 }
