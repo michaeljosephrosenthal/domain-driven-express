@@ -13,7 +13,7 @@ function routeBuilder(router, routes, prefix='') {
 function domainRoutes({prefix, routes}){
     return routeBuilder(express.Router(), routes, `/${prefix}`)
 }
-export function domainMiddlewareGenerator(domains){
+export default function domainMiddlewareGenerator(domains){
     return Object.values(domains)
         .filter(domain => domain.routes)
         .map(domainRoutes)

@@ -99,7 +99,7 @@ module.exports =
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.domainMiddlewareGenerator = domainMiddlewareGenerator;
+	exports.default = domainMiddlewareGenerator;
 
 	var _express = __webpack_require__(1);
 
