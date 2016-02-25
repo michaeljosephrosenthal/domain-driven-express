@@ -13,18 +13,8 @@ function routeBuilder(router, routes, prefix='') {
 function domainRoutes({prefix, routes}){
     return routeBuilder(express.Router(), routes, `/${prefix}`)
 }
-
-function domainMiddlewareGenerator(domains){
+export function domainMiddlewareGenerator(domains){
     return Object.values(domains)
         .filter(domain => domain.routes)
         .map(domainRoutes)
-}
-
-var defaultApp = new express()
-
-export default function Application({app=defaultApp, domains}) {
-    Object.values(domainMiddlewareGenerator(domains)).forEach(
-        middleware => app.use(middleware)
-    )
-    return app
 }
