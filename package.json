@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node-simple-webpacker --entry ./src/Application.js --out ./build/index.js --modules src",
-    "dist": "node-simple-webpacker --task dist --entry ./src/Application.js --out ./dist/index.js --modules src"
+    "dist": "node-simple-webpacker --task dist --entry ./src/server.js --out ./dist/index.js --modules src"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/michaeljosephrosenthal/express-domain-driver#readme",
   "dependencies": {
     "express": "^4.13.4",
+    "strictduck-domain-drivers": "strictduck/domain-drivers",
     "node-simple-webpacker": "michaeljosephrosenthal/node-simple-webpacker"
   }
 }
