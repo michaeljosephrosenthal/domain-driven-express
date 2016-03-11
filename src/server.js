@@ -1,5 +1,5 @@
 import express from 'express'
-import { server as ddServer } from 'strictduck-domain-driven'
+import { server as ddServer } from 'strictduck-domain-drivers'
 import domainMiddlewareGenerator from './domainMiddlewareGenerator'
 
 export default ddServer.implement({
@@ -23,8 +23,7 @@ export default ddServer.implement({
     },
     provider({
         port=3000,
-        Domains,
-        logger=err => console.log(err)
+        Domains
     }){
         if(Domains){ this.generateMiddleware(Domains) }
         this.listen(port, function(error) {
@@ -35,4 +34,4 @@ export default ddServer.implement({
             }
         })
     }
-}
+})

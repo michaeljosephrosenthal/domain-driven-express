@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node-simple-webpacker --entry ./src/Application.js --out ./build/index.js --modules src",
+    "start": "node-simple-webpacker --entry ./src/server.js --out ./build/index.js --modules src",
     "dist": "node-simple-webpacker --task dist --entry ./src/server.js --out ./dist/index.js --modules src"
   },
   "repository": {
