@@ -10,7 +10,7 @@ export default ddServer.implement({
     }){
         server = server || new express()
         server._domains = server._domains || {}
-        server.generateMiddleware = function(domains){
+        server.generateMiddleware = domains => {
             middlewareGenerators.forEach(
                 generator => Object.values(generator(domains)).forEach(
                     middleware => server.use(middleware)
@@ -26,7 +26,7 @@ export default ddServer.implement({
         Domains
     }){
         if(Domains){ this.generateMiddleware(Domains) }
-        this.listen(port, function(error) {
+        this.listen(port, error => {
             if (error) {
                 console.error(error)
             } else {
