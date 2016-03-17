@@ -1,12 +1,13 @@
 {
-  "name": "express-domain-driver",
+  "name": "domain-driven-express",
   "version": "1.0.0",
   "description": "domain driven express apps",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node-simple-webpacker --entry ./src/server.js --out ./build/index.js --modules src",
-    "dist": "node-simple-webpacker --task dist --entry ./src/server.js --out ./dist/index.js --modules src"
+    "dist": "node-simple-webpacker --task dist --entry ./src/server.js --out ./dist/index.js --modules src",
+    "watch-and-dist": "node-simple-webpacker --entry ./src/server.js --out ./dist/index.js --modules src"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,9 @@
   "homepage": "https://github.com/michaeljosephrosenthal/express-domain-driver#readme",
   "dependencies": {
     "express": "^4.13.4",
-    "strictduck-domain-drivers": "strictduck/domain-drivers",
+    "strictduck-domain-driven-fullstack": "strictduck/domain-driven-fullstack"
+  },
+  "devDependencies": {
     "node-simple-webpacker": "michaeljosephrosenthal/node-simple-webpacker"
   }
 }
