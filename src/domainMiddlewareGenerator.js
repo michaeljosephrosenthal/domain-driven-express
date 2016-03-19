@@ -16,6 +16,6 @@ function domainRoutes({prefix, routes}){
 
 export default function domainMiddlewareGenerator(domains){
     return Object.keys(domains)
-        .filter(domain => domains[domain].routes)
+        .filter(domain => Object.keys(domains[domain].get('routes')).length)
         .map(domainRoutes)
 }

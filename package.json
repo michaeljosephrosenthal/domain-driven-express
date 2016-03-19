@@ -21,6 +21,7 @@
   "homepage": "https://github.com/michaeljosephrosenthal/express-domain-driver#readme",
   "dependencies": {
     "express": "^4.13.4",
+    "get-prototype-chain": "^1.0.1",
     "strictduck-domain-driven-fullstack": "strictduck/domain-driven-fullstack"
   },
   "devDependencies": {

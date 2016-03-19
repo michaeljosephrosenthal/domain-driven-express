@@ -18,7 +18,7 @@ module.exports =
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1a7355b0858ca5a3604b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "291afa00c2d7c53917b9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -635,17 +635,25 @@ module.exports =
 	
 	var _domainMiddlewareGenerator2 = _interopRequireDefault(_domainMiddlewareGenerator);
 	
+	var _getPrototypeChain = __webpack_require__(7);
+	
+	var _getPrototypeChain2 = _interopRequireDefault(_getPrototypeChain);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	exports.default = _strictduckDomainDrivenFullstack.server.implement({
 	    name: 'DomainDrivenExpress',
 	    constructor: function constructor(_ref) {
-	        var server = _ref.server;
-	        var Domain = _ref.Domain;
+	        var domains = _ref.Domains;
 	        var _ref$middlewareGenera = _ref.middlewareGenerators;
 	        var middlewareGenerators = _ref$middlewareGenera === undefined ? [_domainMiddlewareGenerator2.default] : _ref$middlewareGenera;
+	        var _ref$server = _ref.server;
+	        var server = _ref$server === undefined ? (0, _express2.default)() : _ref$server;
 	
-	        server = server || (0, _express2.default)();
+	        var rest = _objectWithoutProperties(_ref, ['Domains', 'middlewareGenerators', 'server']);
+	
 	        server._domains = server._domains || {};
 	        server.generateMiddleware = function (domains) {
 	            middlewareGenerators.forEach(function (generator) {
@@ -656,15 +664,15 @@ module.exports =
 	            Object.assign(server._domains, domains);
 	            return server;
 	        };
-	        return [server.generateMiddleware(Domain)];
+	        return [server.generateMiddleware(domains)];
 	    },
 	    provider: function provider(_ref2) {
 	        var _ref2$port = _ref2.port;
 	        var port = _ref2$port === undefined ? 3000 : _ref2$port;
-	        var Domain = _ref2.Domain;
+	        var domains = _ref2.domains;
 	
-	        if (Domain) {
-	            this.generateMiddleware(Domain);
+	        if (domains) {
+	            this.generateMiddleware(domains);
 	        }
 	        this.listen(port, function (error) {
 	            if (error) {
@@ -733,9 +741,15 @@ module.exports =
 	
 	function domainMiddlewareGenerator(domains) {
 	    return Object.keys(domains).filter(function (domain) {
-	        return domains[domain].routes;
+	        return Object.keys(domains[domain].get('routes')).length;
 	    }).map(domainRoutes);
 	}
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = require("get-prototype-chain");
 
 /***/ }
 /******/ ]);
