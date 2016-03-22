@@ -1,30 +1,35 @@
 import express from 'express'
 import { server as ddServer } from 'strictduck-domain-driven-fullstack'
-import domainMiddlewareGenerator from './domainMiddlewareGenerator'
+import { genericDomainMiddlewareGenerator, domainRouteMiddlewareGenerator } from './domainMiddlewareGenerator'
 import getPrototypeChain from 'get-prototype-chain'
 
 export default ddServer.implement({
     name: 'DomainDrivenExpress',
     constructor({
         Domains: domains,
-        middlewareGenerators=[domainMiddlewareGenerator],
-        server=express(), ...rest
+        middlewareGenerators=[ genericDomainMiddlewareGenerator, domainRouteMiddlewareGenerator ],
+        server=express()
     }){
         server._domains = server._domains || {}
-        server.generateMiddleware = domains => {
+        server.generateMiddleware = function(domains){
             middlewareGenerators.forEach(
                 generator => generator(domains).forEach(
-                    middleware => server.use(middleware)
+                    middleware => this.use(middleware)
                 )
             )
-            Object.assign(server._domains, domains)
-            return server
+            Object.assign(this._domains, domains)
         }
-        return [server.generateMiddleware(domains)]
+        server.generateMiddleware.bind(server)(domains)
+        return [server]
     },
-    provider({ port=3000, domains }){
-        if(domains){ this.generateMiddleware(domains) }
-        this.listen(port, error => {
+    provider({ port=3000, DomainDrivenClient: client }){
+        if(client){
+            this.generateMiddleware.bind(this)({'': client.provide()})
+        }
+
+        let app = express()
+        app.use(this)
+        app.listen(port, error => {
             if (error) {
                 console.error(error)
             } else {
