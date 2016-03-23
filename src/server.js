@@ -1,7 +1,6 @@
 import express from 'express'
 import { server as ddServer } from 'strictduck-domain-driven-fullstack'
 import { genericDomainMiddlewareGenerator, domainRouteMiddlewareGenerator } from './domainMiddlewareGenerator'
-import getPrototypeChain from 'get-prototype-chain'
 
 export default ddServer.implement({
     name: 'DomainDrivenExpress',

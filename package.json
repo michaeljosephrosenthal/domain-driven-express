@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node-simple-webpacker --entry ./src/server.js --out ./build/index.js --modules src",
     "dist": "node-simple-webpacker --task dist --entry ./src/server.js --out ./dist/index.js --modules src",
-    "watch-and-dist": "node-simple-webpacker --entry ./src/server.js --out ./dist/index.js --modules src"
+    "watch-and-dist": "node-simple-webpacker --entry ./src/server.js --out ./dist/index.js --modules src",
+    "dist-for-browser": "node-simple-webpacker --react --context BROWSER --task dist --entry ./src/index.js --out ./browser.js --modules src",
+    "dist-for-node": "node-simple-webpacker --react --context NODE --task dist --entry ./src/index.js --out ./node.js --modules src"
   },
   "repository": {
     "type": "git",
