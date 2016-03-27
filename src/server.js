@@ -1,14 +1,20 @@
+import { resolve } from 'strictduck'
 import express from 'express'
-import { server as ddServer } from 'strictduck-domain-driven-fullstack'
+import { server as ddServer, storePersistencePlugin } from 'strictduck-domain-driven-fullstack'
 import { genericDomainMiddlewareGenerator, domainRouteMiddlewareGenerator } from './domainMiddlewareGenerator'
 
 export default ddServer.implement({
     name: 'DomainDrivenExpress',
     constructor({
         Domains: domains,
+        DomainDrivenStorePersistencePlugin : persister,
         middlewareGenerators=[ genericDomainMiddlewareGenerator, domainRouteMiddlewareGenerator ],
-        server=express()
+        server=express(),
+        container,
     }){
+        if(!(persister instanceof Error))
+            persister.provide(domains);
+
         server._domains = server._domains || {}
         server.generateMiddleware = function(domains){
             middlewareGenerators.forEach(
