@@ -2,14 +2,10 @@
   "name": "domain-driven-express",
   "version": "1.0.0",
   "description": "domain driven express apps",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node-simple-webpacker --entry ./src/server.js --out ./build/index.js --modules src",
-    "dist": "node-simple-webpacker --task dist --entry ./src/server.js --out ./dist/index.js --modules src",
-    "watch-and-dist": "node-simple-webpacker --entry ./src/server.js --out ./dist/index.js --modules src",
-    "dist-for-browser": "node-simple-webpacker --react --context BROWSER --task dist --entry ./src/index.js --out ./browser.js --modules src",
-    "dist-for-node": "node-simple-webpacker --react --context NODE --task dist --entry ./src/index.js --out ./node.js --modules src"
+    "dist": "polypacker --preset FULLSTACK_COMPONENT --env PRODUCTION",
+    "watch": "polypacker --preset FULLSTACK_COMPONENT --watch"
   },
   "repository": {
     "type": "git",
@@ -27,6 +23,6 @@
     "strictduck-domain-driven-fullstack": "strictduck/domain-driven-fullstack"
   },
   "devDependencies": {
-    "node-simple-webpacker": "michaeljosephrosenthal/node-simple-webpacker"
+    "polypacker": "michaeljosephrosenthal/polypacker"
   }
 }
