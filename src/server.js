@@ -12,8 +12,10 @@ export default ddServer.implement({
         server=express(),
         container,
     }){
-        if(!(persister instanceof Error))
-            persister.provide(domains);
+        if(!(persister instanceof Error)){
+            persister.provide(domains)
+            domains = persister.provideInjectionForDomainRouteHandlers(domains)
+        }
 
         server._domains = server._domains || {}
         server.generateMiddleware = function(domains){
