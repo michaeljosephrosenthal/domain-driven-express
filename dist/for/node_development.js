@@ -18,7 +18,7 @@ module.exports =
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e78ae89de6c77e9c9e4f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "132de5c6a21cd0485a6b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -746,10 +746,15 @@ module.exports =
 	    });
 	}
 	
-	function routeBuilder(router, routes) {
-	    var prefix = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+	function routeBuilder(_ref) {
+	    var router = _ref.router;
+	    var routes = _ref.routes;
+	    var order = _ref.order;
+	    var _ref$prefix = _ref.prefix;
+	    var prefix = _ref$prefix === undefined ? '' : _ref$prefix;
 	
-	    Object.keys(routes).forEach(function (endpoint) {
+	    var keys = order || Object.keys(routes);
+	    keys.forEach(function (endpoint) {
 	        var _routes$endpoint = routes[endpoint];
 	        var methods = _routes$endpoint.methods;
 	        var handlers = _routes$endpoint.handlers;
@@ -761,11 +766,12 @@ module.exports =
 	    return router;
 	};
 	
-	function domainRoutes(_ref) {
-	    var prefix = _ref.prefix;
-	    var routes = _ref.routes;
+	function domainRoutes(_ref2) {
+	    var prefix = _ref2.prefix;
+	    var routes = _ref2.routes;
+	    var order = _ref2.order;
 	
-	    return routeBuilder(_express2.default.Router(), routes, '/' + prefix);
+	    return routeBuilder({ router: _express2.default.Router(), routes: routes, order: order, prefix: '/' + prefix });
 	}
 	
 	function genericMiddlewareFlattener(domains) {

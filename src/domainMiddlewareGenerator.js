@@ -6,8 +6,9 @@ function filterDomainsForType(domains, type){
         .filter(domain => Object.keys(domain.get(type)).length)
 }
 
-function routeBuilder(router, routes, prefix='') {
-  Object.keys(routes).forEach(endpoint => {
+function routeBuilder({router, routes, order, prefix=''}) {
+  let keys = order || Object.keys(routes)
+  keys.forEach(endpoint => {
      var {methods, handlers} = routes[endpoint];
      methods.forEach(method => {
        router[method](prefix+endpoint, ...handlers);
@@ -16,8 +17,8 @@ function routeBuilder(router, routes, prefix='') {
   return router;
 };
 
-function domainRoutes({prefix, routes}){
-    return routeBuilder(express.Router(), routes, `/${prefix}`)
+function domainRoutes({prefix, routes, order}){
+    return routeBuilder({router: express.Router(), routes, order, prefix: `/${prefix}`})
 }
 
 
