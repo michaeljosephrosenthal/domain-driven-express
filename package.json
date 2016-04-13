@@ -4,7 +4,7 @@
   "description": "domain driven express apps",
   "main": "./dist/index.js",
   "scripts": {
-    "dist": "polypacker --preset FULLSTACK_COMPONENT --env PRODUCTION",
+    "dist": "polypacker --preset FULLSTACK_COMPONENT",
     "watch": "polypacker --preset FULLSTACK_COMPONENT --watch"
   },
   "repository": {
