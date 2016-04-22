@@ -1,7 +1,7 @@
 {
   "name": "domain-driven-express",
-  "version": "1.0.0",
-  "description": "domain driven express apps",
+  "version": "0.1.1",
+  "description": "domain driven express server used in bufflehead",
   "main": "./dist/index.js",
   "scripts": {
     "dist": "polypacker --preset FULLSTACK_COMPONENT",
@@ -9,21 +9,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/michaeljosephrosenthal/express-domain-driver.git"
+    "url": "git+https://github.com/michaeljosephrosenthal/domain-driven-express.git"
   },
   "author": "Michael Joseph Rosenthal <rosenthalm93@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/michaeljosephrosenthal/express-domain-driver/issues"
+    "url": "https://github.com/michaeljosephrosenthal/domain-driven-express/issues"
   },
-  "homepage": "https://github.com/michaeljosephrosenthal/express-domain-driver#readme",
+  "homepage": "https://github.com/michaeljosephrosenthal/domain-driven-express#readme",
   "dependencies": {
     "express": "^4.13.4",
     "get-prototype-chain": "^1.0.1",
-    "source-map-support": "^0.4.0",
-    "strictduck-domain-driven-fullstack": "strictduck/domain-driven-fullstack"
+    "strictduck": "0.1.1",
+    "strictduck-domain-driven-fullstack": "0.1.1"
   },
   "devDependencies": {
-    "polypacker": "michaeljosephrosenthal/polypacker"
+    "polypacker": "0.1.1"
   }
 }

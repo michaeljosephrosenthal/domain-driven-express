@@ -1,2 +1,229 @@
-require("source-map-support").install(),module.exports=function(e){function r(t){if(n[t])return n[t].exports;var o=n[t]={exports:{},id:t,loaded:!1};return e[t].call(o.exports,o,o.exports,r),o.loaded=!0,o.exports}var n={};return r.m=e,r.c=n,r.p="",r(0)}([function(e,r,n){e.exports=n(3)},function(e,r){e.exports=require("express")},function(e,r,n){"use strict";function t(e){return e&&e.__esModule?e:{"default":e}}function o(e){if(Array.isArray(e)){for(var r=0,n=Array(e.length);r<e.length;r++)n[r]=e[r];return n}return Array.from(e)}function i(e,r){return Object.keys(e).map(function(r){return e[r]}).filter(function(e){return Object.keys(e.get(r)).length})}function u(e){var r=e.router,n=e.routes,t=e.order,i=e.prefix,u=void 0===i?"":i,a=t||Object.keys(n);return a.forEach(function(e){var t=n[e],i=t.methods,a=t.handlers;i.forEach(function(n){r[n].apply(r,[u+e].concat(o(a)))})}),r}function a(e){var r=e.prefix,n=e.routes,t=e.order;return u({router:l["default"].Router(),routes:n,order:t,prefix:"/"+r})}function c(e){return i(e,"middleware").reduce(function(e,r){return[].concat(o(e),o(r.get("middleware")))},[]).filter(function(e){return"function"==typeof e})}function d(e){return i(e,"routes").map(a)}function s(e){return c(e)}Object.defineProperty(r,"__esModule",{value:!0}),r.domainRouteMiddlewareGenerator=d,r.genericDomainMiddlewareGenerator=s;var f=n(1),l=t(f)},function(e,r,n){"use strict";Object.defineProperty(r,"__esModule",{value:!0});var t=n(4)["default"];r["default"]=t},function(e,r,n){"use strict";function t(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(r,"__esModule",{value:!0});var o=(n(5),n(1)),i=t(o),u=n(6),a=n(2);r["default"]=u.server.implement({name:"DomainDrivenExpress",constructor:function(e){var r=e.Domains,n=e.DomainDrivenStorePersistencePlugin,t=e.middlewareGenerators,o=void 0===t?[a.genericDomainMiddlewareGenerator,a.domainRouteMiddlewareGenerator]:t,u=e.server,c=void 0===u?(0,i["default"])():u;e.container;return n instanceof Error||(n.provide(r),r=n.provideInjectionForDomainRouteHandlers(r)),c._domains=c._domains||{},c.generateMiddleware=function(e){var r=this;o.forEach(function(n){return n(e).forEach(function(e){return r.use(e)})}),Object.assign(this._domains,e)},c.generateMiddleware.bind(c)(r),[c]},provider:function(e){var r=e.port,n=void 0===r?3e3:r,t=e.DomainDrivenClient;t&&this.generateMiddleware.bind(this)({"":t.provide()});var o=(0,i["default"])();o.use(this),o.listen(n,function(e){e?console.error(e):console.info("==> Listening on port "+n+". Open up http://localhost:"+n+"/ in your browser.")})}})},function(e,r){e.exports=require("strictduck")},function(e,r){e.exports=require("strictduck-domain-driven-fullstack")}]);
+require("source-map-support").install();
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(3);
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	module.exports = require("express");
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.domainRouteMiddlewareGenerator = domainRouteMiddlewareGenerator;
+	exports.genericDomainMiddlewareGenerator = genericDomainMiddlewareGenerator;
+	
+	var _express = __webpack_require__(1);
+	
+	var _express2 = _interopRequireDefault(_express);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function filterDomainsForType(domains, type) {
+	    return Object.keys(domains).map(function (k) {
+	        return domains[k];
+	    }).filter(function (domain) {
+	        return Object.keys(domain.get(type)).length;
+	    });
+	}
+	
+	function routeBuilder(_ref) {
+	    var router = _ref.router;
+	    var routes = _ref.routes;
+	    var order = _ref.order;
+	    var _ref$prefix = _ref.prefix;
+	    var prefix = _ref$prefix === undefined ? '' : _ref$prefix;
+	
+	    var keys = order || Object.keys(routes);
+	    keys.forEach(function (endpoint) {
+	        var _routes$endpoint = routes[endpoint];
+	        var methods = _routes$endpoint.methods;
+	        var handlers = _routes$endpoint.handlers;
+	
+	        methods.forEach(function (method) {
+	            router[method].apply(router, [prefix + endpoint].concat(_toConsumableArray(handlers)));
+	        });
+	    });
+	    return router;
+	};
+	
+	function domainRoutes(_ref2) {
+	    var prefix = _ref2.prefix;
+	    var routes = _ref2.routes;
+	    var order = _ref2.order;
+	
+	    return routeBuilder({ router: _express2.default.Router(), routes: routes, order: order, prefix: '/' + prefix });
+	}
+	
+	function genericMiddlewareFlattener(domains) {
+	    return filterDomainsForType(domains, 'middleware').reduce(function (list, domain) {
+	        return [].concat(_toConsumableArray(list), _toConsumableArray(domain.get('middleware')));
+	    }, []).filter(function (middleware) {
+	        return typeof middleware == 'function';
+	    });
+	}
+	
+	function domainRouteMiddlewareGenerator(domains) {
+	    return filterDomainsForType(domains, 'routes').map(domainRoutes);
+	}
+	
+	function genericDomainMiddlewareGenerator(domains) {
+	    return genericMiddlewareFlattener(domains);
+	}
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var server = ( true ? __webpack_require__(4) : require('./representation')).default;
+	exports.default = server;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _strictduck = __webpack_require__(5);
+	
+	var _express = __webpack_require__(1);
+	
+	var _express2 = _interopRequireDefault(_express);
+	
+	var _strictduckDomainDrivenFullstack = __webpack_require__(6);
+	
+	var _domainMiddlewareGenerator = __webpack_require__(2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _strictduckDomainDrivenFullstack.server.implement({
+	    name: 'DomainDrivenExpress',
+	    constructor: function constructor(_ref) {
+	        var domains = _ref.Domains;
+	        var persister = _ref.DomainDrivenStorePersistencePlugin;
+	        var _ref$middlewareGenera = _ref.middlewareGenerators;
+	        var middlewareGenerators = _ref$middlewareGenera === undefined ? [_domainMiddlewareGenerator.genericDomainMiddlewareGenerator, _domainMiddlewareGenerator.domainRouteMiddlewareGenerator] : _ref$middlewareGenera;
+	        var _ref$server = _ref.server;
+	        var server = _ref$server === undefined ? (0, _express2.default)() : _ref$server;
+	        var container = _ref.container;
+	
+	        if (!(persister instanceof Error)) {
+	            persister.provide(domains);
+	            domains = persister.provideInjectionForDomainRouteHandlers(domains);
+	        }
+	
+	        server._domains = server._domains || {};
+	        server.generateMiddleware = function (domains) {
+	            var _this = this;
+	
+	            middlewareGenerators.forEach(function (generator) {
+	                return generator(domains).forEach(function (middleware) {
+	                    return _this.use(middleware);
+	                });
+	            });
+	            Object.assign(this._domains, domains);
+	        };
+	        server.generateMiddleware.bind(server)(domains);
+	        return [server];
+	    },
+	    provider: function provider(_ref2) {
+	        var _ref2$port = _ref2.port;
+	        var port = _ref2$port === undefined ? 3000 : _ref2$port;
+	        var client = _ref2.DomainDrivenClient;
+	
+	        if (client) {
+	            this.generateMiddleware.bind(this)({ '': client.provide() });
+	        }
+	
+	        var app = (0, _express2.default)();
+	        app.use(this);
+	        app.listen(port, function (error) {
+	            if (error) {
+	                console.error(error);
+	            } else {
+	                console.info('==> Listening on port ' + port + '. Open up http://localhost:' + port + '/ in your browser.');
+	            }
+	        });
+	    }
+	});
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	module.exports = require("strictduck");
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = require("strictduck-domain-driven-fullstack");
+
+/***/ }
+/******/ ]);
 //# sourceMappingURL=node_development.js.map

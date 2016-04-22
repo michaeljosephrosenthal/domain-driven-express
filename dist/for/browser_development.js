@@ -1,2 +1,111 @@
-require("source-map-support").install(),module.exports=function(e){function r(n){if(t[n])return t[n].exports;var o=t[n]={exports:{},id:n,loaded:!1};return e[n].call(o.exports,o,o.exports,r),o.loaded=!0,o.exports}var t={};return r.m=e,r.c=t,r.p="",r(0)}([function(e,r,t){e.exports=t(1)},function(e,r,t){"use strict";Object.defineProperty(r,"__esModule",{value:!0});var n=t(2)["default"];r["default"]=n},function(e,r,t){"use strict";Object.defineProperty(r,"__esModule",{value:!0});var n=t(3);r["default"]=n.server.implement({name:"DomainDrivenExpress",constructor:function(e){var r=e.Domains,t=(e.middlewareGenerators,e.server),n=void 0===t?{}:t;return n._domains=n._domains||{},n.generateMiddleware=function(e){return this},n.generateMiddleware.bind(n)(r),n.use=function(){return Error("express requires a node context")},n.listen=function(){return Error("express requires a node context")},[n]},provider:function(){return this}})},function(e,r){e.exports=require("strictduck-domain-driven-fullstack")}]);
+require("source-map-support").install();
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(1);
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var server = ( false ? require('./server') : __webpack_require__(2)).default;
+	exports.default = server;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _strictduckDomainDrivenFullstack = __webpack_require__(3);
+	
+	exports.default = _strictduckDomainDrivenFullstack.server.implement({
+	    name: 'DomainDrivenExpress',
+	    constructor: function constructor(_ref) {
+	        var domains = _ref.Domains;
+	        var _ref$middlewareGenera = _ref.middlewareGenerators;
+	        var middlewareGenerators = _ref$middlewareGenera === undefined ? [] : _ref$middlewareGenera;
+	        var _ref$server = _ref.server;
+	        var server = _ref$server === undefined ? {} : _ref$server;
+	
+	        server._domains = server._domains || {};
+	        server.generateMiddleware = function (domains) {
+	            return this;
+	        };
+	        server.generateMiddleware.bind(server)(domains);
+	        server.use = function () {
+	            return Error("express requires a node context");
+	        };
+	        server.listen = function () {
+	            return Error("express requires a node context");
+	        };
+	        return [server];
+	    },
+	    provider: function provider() {
+	        return this;
+	    }
+	});
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	module.exports = require("strictduck-domain-driven-fullstack");
+
+/***/ }
+/******/ ]);
 //# sourceMappingURL=browser_development.js.map
