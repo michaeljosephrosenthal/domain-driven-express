@@ -1,6 +1,6 @@
 {
   "name": "domain-driven-express",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "domain driven express server used in bufflehead",
   "main": "./dist/index.js",
   "scripts": {
