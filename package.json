@@ -1,6 +1,6 @@
 {
   "name": "domain-driven-express",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "domain driven express server used in bufflehead",
   "main": "./dist/index.js",
   "scripts": {
@@ -18,13 +18,10 @@
   },
   "homepage": "https://github.com/michaeljosephrosenthal/domain-driven-express#readme",
   "dependencies": {
-    "strictduck": "~0.1.2",
-    "strictduck-domain-driven-fullstack": "~0.1.2",
-
-    "express": "^4.13.4",
-    "get-prototype-chain": "^1.0.1"
+    "strictduck-domain-driven-fullstack": "~0.1.4",
+    "express": "^4.13.4"
   },
   "devDependencies": {
-    "polypacker": "0.1.2"
+    "polypacker": "~0.1.5"
   }
 }

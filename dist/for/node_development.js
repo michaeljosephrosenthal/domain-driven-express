@@ -149,13 +149,11 @@ module.exports =
 	    value: true
 	});
 	
-	var _strictduck = __webpack_require__(5);
-	
 	var _express = __webpack_require__(1);
 	
 	var _express2 = _interopRequireDefault(_express);
 	
-	var _strictduckDomainDrivenFullstack = __webpack_require__(6);
+	var _strictduckDomainDrivenFullstack = __webpack_require__(5);
 	
 	var _domainMiddlewareGenerator = __webpack_require__(2);
 	
@@ -214,12 +212,6 @@ module.exports =
 
 /***/ },
 /* 5 */
-/***/ function(module, exports) {
-
-	module.exports = require("strictduck");
-
-/***/ },
-/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = require("strictduck-domain-driven-fullstack");

@@ -1,4 +1,3 @@
-import { resolve } from 'strictduck'
 import express from 'express'
 import { server as ddServer, storePersistencePlugin } from 'strictduck-domain-driven-fullstack'
 import { genericDomainMiddlewareGenerator, domainRouteMiddlewareGenerator } from './domainMiddlewareGenerator'
